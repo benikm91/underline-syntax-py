@@ -29,10 +29,23 @@ class UnderlineSyntax(unittest.TestCase):
         underlineSyntax = __.inner.done()
         self.assertEqual(lambdaSyntax(A()), underlineSyntax(A()))
 
-    def testCallMethod(self):
+    def testMethodCall(self):
         class A:
             def inner(self):
                 return "inner"
         lambdaSyntax = lambda x: x.inner()
         underlineSyntax = __.inner()
+        self.assertEqual(lambdaSyntax(A()), underlineSyntax(A()))
+
+    def testMethodCalls(self):
+        class A:
+
+            def recursive(self):
+                return self
+
+            def inner(self):
+                return "inner"
+
+        lambdaSyntax = lambda x: x.recursive().recursive().inner()
+        underlineSyntax = __.recursive().recursive().inner()
         self.assertEqual(lambdaSyntax(A()), underlineSyntax(A()))
