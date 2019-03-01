@@ -6,36 +6,36 @@ from pyext.underline_syntax.underline_syntax import __
 class UnderlineSyntax(unittest.TestCase):
 
     def testAdd(self):
-        lambdaSyntax = lambda x: x + 5
-        underlineSyntax = __ + 5
-        self.assertEqual(lambdaSyntax(2), underlineSyntax(2))
+        lambda_syntax = lambda x: x + 5
+        underline_syntax = __ + 5
+        self.assertEqual(lambda_syntax(2), underline_syntax(2))
 
     def testTrueDiv(self):
-        lambdaSyntax = lambda x: x / 5
-        underlineSyntax = __ / 5
-        self.assertEqual(lambdaSyntax(2), underlineSyntax(2))
+        lambda_syntax = lambda x: x / 5
+        underline_syntax = __ / 5
+        self.assertEqual(lambda_syntax(2), underline_syntax(2))
 
     def testDiv(self):
-        lambdaSyntax = lambda x: x // 5
-        underlineSyntax = __ // 5
-        self.assertEqual(lambdaSyntax(2), underlineSyntax(2))
+        lambda_syntax = lambda x: x // 5
+        underline_syntax = __ // 5
+        self.assertEqual(lambda_syntax(2), underline_syntax(2))
 
     def testAttributeAccess(self):
         class A:
             @property
             def inner(self):
                 return "inner"
-        lambdaSyntax = lambda x: x.inner
-        underlineSyntax = __.inner.done()
-        self.assertEqual(lambdaSyntax(A()), underlineSyntax(A()))
+        lambda_syntax = lambda x: x.inner
+        underline_syntax = __.inner.done()
+        self.assertEqual(lambda_syntax(A()), underline_syntax(A()))
 
     def testMethodCall(self):
         class A:
             def inner(self):
                 return "inner"
-        lambdaSyntax = lambda x: x.inner()
-        underlineSyntax = __.inner()
-        self.assertEqual(lambdaSyntax(A()), underlineSyntax(A()))
+        lambda_syntax = lambda x: x.inner()
+        underline_syntax = __.inner()
+        self.assertEqual(lambda_syntax(A()), underline_syntax(A()))
 
     def testMethodCalls(self):
         class A:
@@ -46,6 +46,11 @@ class UnderlineSyntax(unittest.TestCase):
             def inner(self):
                 return "inner"
 
-        lambdaSyntax = lambda x: x.recursive().recursive().inner()
-        underlineSyntax = __.recursive().recursive().inner()
-        self.assertEqual(lambdaSyntax(A()), underlineSyntax(A()))
+        lambda_syntax = lambda x: x.recursive().recursive().inner()
+        underline_syntax = __.recursive().recursive().inner()
+        self.assertEqual(lambda_syntax(A()), underline_syntax(A()))
+
+    def testToString(self):
+        lambda_syntax = lambda x: str(x)
+        underline_syntax = __.__toString__()
+        self.assertEqual(lambda_syntax(2), underline_syntax(2))
