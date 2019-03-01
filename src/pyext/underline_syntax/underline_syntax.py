@@ -6,6 +6,9 @@ class LazyOperations:
     def __truediv__(self, other):
         return LazyOperations(self.operations + (lambda x: x / other, ))
 
+    def __floordiv__(self, other):
+        return LazyOperations(self.operations + (lambda x: x // other, ))
+
     def __add__(self, other):
         return LazyOperations(self.operations + (lambda x: x + other, ))
 
