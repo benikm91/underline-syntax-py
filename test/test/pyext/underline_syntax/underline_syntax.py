@@ -54,3 +54,8 @@ class UnderlineSyntax(unittest.TestCase):
         lambda_syntax = lambda x: str(x)
         underline_syntax = __.__toString__()
         self.assertEqual(lambda_syntax(2), underline_syntax(2))
+
+    def testIndex(self):
+        lambda_syntax = lambda x: x['key']
+        underline_syntax = __['key']
+        self.assertEqual(lambda_syntax({'key': 'value'}), underline_syntax({'key': 'value'}))

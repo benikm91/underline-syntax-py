@@ -28,6 +28,11 @@ class LazyOperations:
             return self.__toString__()
         return LazyOperationsNextCall(self.operations + (delayed_getattr(), ))
 
+    def __getitem__(self, key):
+        def delayed_getitem():
+            return lambda x: x[key]
+        return LazyOperations(self.operations + (delayed_getitem(), ))
+
 
 class LazyOperationsNextCall(LazyOperations):
 
