@@ -59,3 +59,9 @@ class UnderlineSyntax(unittest.TestCase):
         lambda_syntax = lambda x: x['key']
         underline_syntax = __['key']
         self.assertEqual(lambda_syntax({'key': 'value'}), underline_syntax({'key': 'value'}))
+
+    def testEq(self):
+        lambda_syntax = lambda x: x == 5
+        underline_syntax = __ == 5
+        self.assertEqual(lambda_syntax(5), underline_syntax(5))
+        self.assertEqual(lambda_syntax(6), underline_syntax(6))

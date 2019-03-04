@@ -22,16 +22,21 @@ class LazyOperations:
         return res
 
     def __getattr__(self, name):
-        def delayed_getattr():
-            return lambda x: getattr(x, name)
+        def delayed_getattr(x):
+            return getattr(x, name)
         if name == '__toString__':
             return self.__toString__()
-        return LazyOperationsNextCall(self.operations + (delayed_getattr(), ))
+        return LazyOperationsNextCall(self.operations + (delayed_getattr, ))
 
     def __getitem__(self, key):
-        def delayed_getitem():
-            return lambda x: x[key]
-        return LazyOperations(self.operations + (delayed_getitem(), ))
+        def delayed_getitem(x):
+            return x[key]
+        return LazyOperations(self.operations + (delayed_getitem, ))
+
+    def __eq__(self, other):
+        def delayed_eq(x):
+            return x == other
+        return LazyOperations(self.operations + (delayed_eq, ))
 
 
 class LazyOperationsNextCall(LazyOperations):
