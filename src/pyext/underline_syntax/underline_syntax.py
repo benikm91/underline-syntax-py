@@ -43,4 +43,10 @@ class LazyOperationsNextCall(LazyOperations):
         return LazyOperations(self.operations + (lambda x: x(*args, **kwargs), ))
 
 
+"""
+"__" is syntax sugar for "lambda x: x"
+e.g. 
+__['key'] <=> lambda x: x['key']
+__.f() <==> lambda x: x.f()
+"""
 __ = LazyOperations(tuple())
