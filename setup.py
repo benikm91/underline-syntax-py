@@ -4,7 +4,7 @@ setup(
     name='underline',
     version='0.1',
     description='Give Scala-Like underline syntax to Python',
-    url='https://gitlab.fhnw.ch/benjamin.meyer1/kennwerte_immo_annotator',
+    url='https://github.com/benikm91/underline-syntax-py',
     author='Benjamin Meyer',
     author_email='benjamin.meyer@fhnw.ch',
     package_dir={'': 'src'},
